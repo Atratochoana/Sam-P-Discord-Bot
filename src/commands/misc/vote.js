@@ -1,21 +1,70 @@
-const { VoiceState } = require("discord.js");
+const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, GuildMember } = require("discord.js");
 
 module.exports = {
     name: "vote",
     description: "Creates a vote",
     options: [
         {
-            name: "name",
-            descripton: "What your vote is called",
+            name: "vote",
+            description: "What your vote is called",
             required: true,
+            type: ApplicationCommandOptionType.String,
         },
         {
             name: "description",
             description: "Descripton of the vote",
+            required: true,
+            type: ApplicationCommandOptionType.String,
         },
+        {
+            name: "ping",
+            description: "Pings everyone",
+            type: ApplicationCommandOptionType.Boolean,
+        },
+        {
+            name: 'colour',
+            description: 'Sets a colour on the sidebar of the embed. Has to be Hex value, otherwise wont work',
+            type: ApplicationCommandOptionType.String,
+        }
     ],
+    /**
+     * 
+     * @param {Client} client 
+     * @param {Interaction} interaction 
+     */
 
-    callback: (client,interaction) => {
-        member = interaction.member
-    }
-}
+    callback: async (client, interaction) => { 
+        guildMember = interaction.member
+        member = interaction.user
+
+        const embed = new EmbedBuilder()
+            .setTitle(`${interaction.options.get('vote').value}`)
+            .setDescription(`${interaction.options.get('description').value}`)
+            .setColor(interaction.options.get('colour')?.value || '#0fdbc0')
+            .setFooter({
+                iconURL: member.avatarURL(),
+                text: member.username
+            })
+            
+        if (interaction.options.get('ping')?.value || false) {
+            pingVal = '@everyone'
+        } else {
+            pingVal = ''
+        };
+
+        interaction.reply({
+            content: 'Poll has been sent',
+            ephemeral: true,
+        })
+
+        const messageReply = await interaction.channel.send({
+            content: pingVal,
+            fetchReply: true,
+            embeds: [embed],
+        },)
+        messageReply.react('👍')
+        messageReply.react('👎')       
+
+        
+    },
+};
