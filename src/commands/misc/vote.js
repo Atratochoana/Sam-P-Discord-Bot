@@ -3,6 +3,8 @@ const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, GuildMe
 module.exports = {
     name: "vote",
     description: "Creates a vote",
+    //devOnly: false,
+    deleted: false,
     options: [
         {
             name: "vote",
@@ -25,6 +27,11 @@ module.exports = {
             name: 'colour',
             description: 'Sets a colour on the sidebar of the embed. Has to be Hex value, otherwise wont work',
             type: ApplicationCommandOptionType.String,
+        },
+        {
+            name: 'author',
+            description: 'If the author is to be displayed or not',
+            type: ApplicationCommandOptionType.Boolean,
         }
     ],
     /**
@@ -41,10 +48,14 @@ module.exports = {
             .setTitle(`${interaction.options.get('vote').value}`)
             .setDescription(`${interaction.options.get('description').value}`)
             .setColor(interaction.options.get('colour')?.value || '#0fdbc0')
-            .setFooter({
-                iconURL: member.avatarURL(),
-                text: member.username
-            })
+            if (interaction.options.get('author')) {
+                embed.setFooter({
+                    iconURL: member.avatarURL(),
+                    text: member.username
+                });
+                embed.setTimestamp()
+            }
+            
             
         if (interaction.options.get('ping')?.value || false) {
             pingVal = '@everyone'

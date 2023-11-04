@@ -8,7 +8,7 @@ module.exports = async (client) => {
     const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
       client,
-      testServer
+      //testServer
     );
 
     for (const localCommand of localCommands) {
@@ -29,7 +29,6 @@ module.exports = async (client) => {
           await applicationCommands.edit(existingCommand.id, {
             description,
             options,
-            devOnly,
           });
 
           console.log(`🔁 Edited command "${name}".`);
@@ -52,6 +51,6 @@ module.exports = async (client) => {
       }
     }
   } catch (error) {
-    console.log(`TThere was an error: ${error}`);
+    console.log(`There was an error: ${error}`);
   }
 };

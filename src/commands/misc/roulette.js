@@ -6,7 +6,7 @@ function getRndInteger(min, max) {
 module.exports = {
     name: "roulette",
     description : 'Roulette for punishment, use to find out ;)',
-    
+    deleted: false,
 
     callback: (client,interaction) =>{
         user = interaction.member

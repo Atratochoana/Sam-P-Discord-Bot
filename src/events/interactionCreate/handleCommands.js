@@ -1,10 +1,20 @@
-const { devs, testServer } = require('../../../config.json');
+const { devs, testServer, permission} = require('../../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
+const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, ButtonBuilder } = require("discord.js");
+const GiveAway = require('../../commands/misc/GiveAway');
+
+/**
+ * 
+ * @param {Client} client 
+ * @param {Interaction} interaction 
+ * @returns 
+ */
 
 module.exports = async (client, interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const localCommands = getLocalCommands();
+
 
   try {
     const commandObject = localCommands.find(
@@ -12,6 +22,21 @@ module.exports = async (client, interaction) => {
     );
 
     if (!commandObject) return;
+
+    const memberId = interaction.member.id
+
+    if (commandObject.permissionLevel >= 1) {
+
+      if (permission[memberId] < commandObject.permissionLevel) {
+        interaction.reply({
+          content: `You do not have a sufficient permission level for this command.`,
+          ephemeral: true,
+        });
+        return;
+      }
+    }
+      
+    
 
     if (commandObject.devOnly) {
       if (!devs.includes(interaction.member.id)) {
