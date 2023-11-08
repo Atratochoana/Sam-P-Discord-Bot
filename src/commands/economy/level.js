@@ -13,6 +13,7 @@ module.exports = {
             type: ApplicationCommandOptionType.Mentionable,
         }
     ],
+    deleted: true,
 
     /**
      * 
