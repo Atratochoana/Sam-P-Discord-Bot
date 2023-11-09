@@ -9,7 +9,6 @@ const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, ButtonB
 
 module.exports = (client,interaction) => {
 
-
     interaction.reply({
         ephemeral: true,
         content: `You have been registered for the giveaway. :tada:`

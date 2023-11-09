@@ -39,12 +39,7 @@ module.exports = {
      * @param {Interaction} interaction 
      */
 
-    callback: (client,interaction,button = false) => {
-        
-        if (button === true) {
-            buttonCallBack(interaction)
-            return
-        };
+    callback: (client,interaction) => {
 
         timeStamp = Math.floor(Date.now() /1000) + interaction.options.getInteger('giveaway-duration')
 
