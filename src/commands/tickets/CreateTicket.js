@@ -48,6 +48,7 @@ module.exports = {
             }).then(threadChannel => {
                 // threadChannel.members.add("527164962515189770")
                 // threadChannel.members.add(interaction.user.id)
+                threadChannel
                 threadChannel.send({embeds: [embed]})
             })
 
