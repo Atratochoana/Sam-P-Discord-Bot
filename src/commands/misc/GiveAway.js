@@ -1,4 +1,5 @@
 const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
+const GiveAway = require("../../models/GiveAway")
 
 
 module.exports = {
@@ -39,7 +40,7 @@ module.exports = {
      * @param {Interaction} interaction 
      */
 
-    callback: (client,interaction) => {
+    callback: async (client,interaction) => {
 
         timeStamp = Math.floor(Date.now() /1000) + interaction.options.getInteger('giveaway-duration')
 
@@ -59,17 +60,33 @@ module.exports = {
         const row = new ActionRowBuilder()
         row.components.push(button)
 
+        let messageId;
 
-        interaction.channel.send({
+        await interaction.channel.send({
             embeds: [embed],
             fetchreply: true,
-            content: `${timeStamp} | ${interaction.createdTimestamp} | ${interaction.options.getInteger('giveaway-duration')}`,
             components: [row],
-        })
+        }).then(message => {messageId = message.id})
 
         interaction.reply({
             content: `Giveaway for [${interaction.options.getString('name')}] has been made for ${interaction.options.getInteger('amount-of-winners')} winners, that lasts [${interaction.options.getInteger('giveaway-duration')}] seconds.`,
             ephemeral: true
         })
+
+        setTimeout(decideWinner,interaction.options.getInteger("giveaway-duration")*1000,interaction,messageId)
     }
+}
+
+function decideWinner(interaction,MessageId) {
+
+    let users = GiveAway.find({messageId: MessageId})
+
+    const random = Math.floor(Math.random() * users.length);
+
+    console.log(users)
+
+    console.log(users[random])
+
+    interaction.channel.send(`Winner is <@${users[random]["UserId"]}>`)
+
 }
