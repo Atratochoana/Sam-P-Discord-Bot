@@ -1,5 +1,6 @@
 const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
 const GiveAway =  require("../../../models/GiveAway");
+const log = require("../../../utils/logInteraction")
 
 /**
  * 
@@ -9,6 +10,8 @@ const GiveAway =  require("../../../models/GiveAway");
 
 
 module.exports = async (client,interaction) => {
+    log(interaction)
+    
 
     messageId = interaction.message.id
 

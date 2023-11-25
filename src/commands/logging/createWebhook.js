@@ -1,7 +1,8 @@
 const { Client, Interaction, ApplicationCommandOptionType} = require("discord.js");
+const log = require("../../utils/logInteraction")
 
 module.exports = {
-    name: 'logging-channel',
+    name: 'create-webhook',
     description: "Creates a channel to log commands in this server",
     userPermissions: true,
     permissionLevel: 3,
@@ -20,6 +21,8 @@ module.exports = {
      */
 
     callback: (client,interaction) => {
+        log(interaction);
+
         channel = interaction.options.getChannel("channel")
         channel.createWebhook({
             name: "Sam-P Logging",
@@ -27,7 +30,7 @@ module.exports = {
         // add a funcntionality to add to DB with guild id and webhook id so it can be called.
 
         interaction.reply({
-            content: 'Webhook has been made, Its not recommended to make multiple webhook\' in the same channel',
+            content: 'Webhook has been made, Its not recommended to make multiple webhook\'s in the same channel',
             ephemeral: true
         })
 
