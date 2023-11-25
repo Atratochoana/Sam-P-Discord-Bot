@@ -18,7 +18,7 @@ module.exports = async (client,interaction) => {
     };
 
     try {
-        giveAway = await GiveAway.findOne();  // if there is already an entry
+        giveAway = await GiveAway.findOne(query);  // if there is already an entry
 
         if (giveAway) return
 

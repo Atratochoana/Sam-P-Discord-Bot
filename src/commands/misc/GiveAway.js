@@ -77,16 +77,18 @@ module.exports = {
     }
 }
 
-function decideWinner(interaction,MessageId) {
+async function decideWinner(interaction,messageId) {
 
-    let users = GiveAway.find({messageId: MessageId})
+    let users = await GiveAway.find({
+        MessageId: messageId
+    })
 
     const random = Math.floor(Math.random() * users.length);
 
-    console.log(users)
-
-    console.log(users[random])
+    if (users.length === 0) {interaction.channel.send(`Nobody entered the giveaway :(`); return}
 
     interaction.channel.send(`Winner is <@${users[random]["UserId"]}>`)
+
+    setTimeout(async () => {await GiveAway.deleteMany({MessageId: messageId})},5000) // deletes from data base after 5 seconds
 
 }
