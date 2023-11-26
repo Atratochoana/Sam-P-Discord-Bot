@@ -1,3 +1,5 @@
+const logInteraction = require("../../utils/logInteraction")
+
 module.exports = {
     name:'ping',
     description:'Pong!',
@@ -9,6 +11,7 @@ module.exports = {
     permissionLevel: 0,
 
     callback: async (client,interaction) => {
+        logInteraction(interaction)
         await interaction.deferReply();
 
         const reply = await interaction.fetchReply();

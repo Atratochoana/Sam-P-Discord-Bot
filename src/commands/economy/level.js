@@ -1,7 +1,8 @@
 const { ApplicationCommandOptionType, Client, Interaction, AttachmentBuilder } = require('discord.js');
 const Level = require('../../models/Level');
 const canvacord = require('canvacord');
-const calculateLevelXp = require('../../utils/calculateLevelXp')
+const calculateLevelXp = require('../../utils/calculateLevelXp');
+const logInteraction = require("../../utils/logInteraction");
 
 module.exports = {
     name: 'level',
@@ -22,6 +23,7 @@ module.exports = {
      */
 
     callback: async (client, interaction) => {
+        logInteraction(interaction)
         if (!interaction.inGuild()) {
             interaction.reply('You can only run this command inside a server.');
             return

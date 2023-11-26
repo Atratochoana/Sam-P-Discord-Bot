@@ -1,4 +1,5 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js')
+const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
+const logInteraction = require("../../utils/logInteraction");
 
 module.exports = {
     name:'ban',
@@ -23,6 +24,7 @@ module.exports = {
     botPermissions: [PermissionFlagsBits.Administrator],
 
     callback: (client,interaction) => {
+        logInteraction(interaction)
         const user = interaction.user
         interaction.reply('Enjoying ban town loser - Sam Paddy');
         interaction.member.timeout(5*60*1000).catch(console.error);

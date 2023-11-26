@@ -1,4 +1,5 @@
 const { Client, Interaction, ApplicationCommandOptionType, ChannelType, EmbedBuilder} = require("discord.js");
+const logInteraction = require("../../utils/logInteraction");
 
 module.exports = {
     name: "create-ticket",
@@ -27,6 +28,7 @@ module.exports = {
      */
 
     callback: async (client,interaction) => {
+        logInteraction(interaction)
 
         const guildCategoryId =  "1172226325210222632" // This is where i need to add functionality to check for if one exist | should be done through database
 
