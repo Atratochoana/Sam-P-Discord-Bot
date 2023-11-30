@@ -1,4 +1,3 @@
-const logInteraction = require("../../utils/logInteraction");
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
@@ -10,7 +9,6 @@ module.exports = {
     deleted: false,
 
     callback: (client,interaction) =>{
-        logInteraction(interaction)
         user = interaction.member
         rndPunishment = getRndInteger(0,3);
         if (rndPunishment === 0){

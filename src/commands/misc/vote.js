@@ -1,5 +1,4 @@
 const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, GuildMember } = require("discord.js");
-const logInteraction = require("../../utils/logInteraction");
 
 module.exports = {
     name: "vote",
@@ -42,7 +41,6 @@ module.exports = {
      */
 
     callback: async (client, interaction) => { 
-        logInteraction(interaction)
         guildMember = interaction.member
         member = interaction.user
 

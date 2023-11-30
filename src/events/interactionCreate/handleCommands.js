@@ -2,6 +2,7 @@ const { devs, testServer, permission} = require('../../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
 const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, ButtonBuilder } = require("discord.js");
 const GiveAway = require('../../commands/misc/GiveAway');
+const logInteraction = require('../../utils/logInteraction')
 
 /**
  * 
@@ -84,6 +85,7 @@ module.exports = async (client, interaction) => {
       }
     }
 
+    logInteraction(interaction)
     await commandObject.callback(client, interaction);
   } catch (error) {
     console.log(`There was an error running this command: ${error}`);

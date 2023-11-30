@@ -1,5 +1,4 @@
 const { Client, Interaction, ApplicationCommandOptionType} = require("discord.js");
-const log = require("../../utils/logInteraction")
 
 module.exports = {
     name: 'create-webhook',
@@ -21,8 +20,6 @@ module.exports = {
      */
 
     callback: (client,interaction) => {
-        log(interaction);
-
         channel = interaction.options.getChannel("channel")
         channel.createWebhook({
             name: "Sam-P Logging",

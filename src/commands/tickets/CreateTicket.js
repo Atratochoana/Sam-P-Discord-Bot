@@ -1,5 +1,4 @@
 const { Client, Interaction, ApplicationCommandOptionType, ChannelType, EmbedBuilder} = require("discord.js");
-const logInteraction = require("../../utils/logInteraction");
 
 module.exports = {
     name: "create-ticket",
@@ -28,7 +27,6 @@ module.exports = {
      */
 
     callback: async (client,interaction) => {
-        logInteraction(interaction)
 
         const guildCategoryId =  "1172226325210222632" // This is where i need to add functionality to check for if one exist | should be done through database
 
@@ -41,9 +39,12 @@ module.exports = {
             .setDescription(`Hello <@${interaction.user.id}>,
             Bla Bla Bla`)
 
+        const supportRole = ""
+
         liveTicketChannel.threads.create({
                 name: `misc-${interaction.user.username}`,
                 autoArchiveDuration: 1440,
+                editable: false,
                 reason: 'Needed a separate thread for food',
                 type: ChannelType.PrivateThread,
                 invitable: false
@@ -51,7 +52,10 @@ module.exports = {
                 // threadChannel.members.add("527164962515189770")
                 // threadChannel.members.add(interaction.user.id)
                 threadChannel
-                threadChannel.send({embeds: [embed]})
+                threadChannel.send({
+                    embeds: [embed],
+                    content: `<@${supportRole}><@${interaction.user.id}>`
+                })
             })
 
 
