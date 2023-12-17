@@ -12,3 +12,12 @@ language = "nodejs"
 run = ["node", "src/Index.js"]
 deploymentTarget = "cloudrun"
 ignorePorts = false
+
+[rules]
+
+[rules.formatter]
+
+[rules.formatter.fileExtensions]
+
+[rules.formatter.fileExtensions.".js"]
+id = "module:nodejs-20:v12-20231130-57acee0/languageServer:typescript-language-server"
