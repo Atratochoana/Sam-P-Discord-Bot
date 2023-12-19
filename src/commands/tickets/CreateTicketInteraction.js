@@ -1,4 +1,4 @@
-const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder} = require("discord.js");
+const { Client, Interaction, ApplicationCommandOptionType, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder} = require("discord.js");
 const ServerSettings =  require("../../models/ServerSettings");
 
 module.exports = {
@@ -56,12 +56,29 @@ module.exports = {
                 }).save()
             }
 
-            testChannel = await ServerSettings.findOne({guildId: interaction.guildId})
-            console.log(testChannel["liveChannel"])
+            const embed = new EmbedBuilder()
+                .setTitle(`Create a Ticket`)
+                .setDescription(`Create a Ticket Here`)
+                .setColor("#f26bd9")
+            
+
+            const button = new ButtonBuilder()
+                .setCustomId(`create-ticket`)
+                .setLabel(`Create`)
+                .setStyle(ButtonStyle.Secondary)
+
+            const row = new ActionRowBuilder()
+            row.components.push(button) 
                 
 
-
             
+            channel.send({
+                content: ``,
+                embeds: [embed],
+                components: [row],
+            })
+                
+
             interaction.reply({
                 content: `Done!`,
                 ephemeral: true,
