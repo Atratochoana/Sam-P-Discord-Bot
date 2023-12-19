@@ -1,6 +1,5 @@
 const path = require('path');
 const getAllFiles = require("../utils/getAllFiles.js");
-const logInteraction = require("../utils/logInteraction.js")
 
 module.exports = (client) => {
     const eventFolders = getAllFiles(path.join(__dirname, '..','events'), true) // gets all folders in events folder

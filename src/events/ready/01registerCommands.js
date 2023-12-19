@@ -8,7 +8,7 @@ module.exports = async (client) => {
     const localCommands = getLocalCommands();
     const applicationCommands = await getApplicationCommands(
       client,
-      //testServer
+      testServer
     );
 
     for (const localCommand of localCommands) {
@@ -47,7 +47,7 @@ module.exports = async (client) => {
           options,
         });
 
-        console.log(`👍 Registered command "${name}."`);
+        console.log(`👍 Registered command "${name}".`);
       }
     }
   } catch (error) {
