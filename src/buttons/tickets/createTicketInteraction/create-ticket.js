@@ -15,7 +15,12 @@ module.exports = async (client, interaction) => {
             .setDescription(`Hello <@${interaction.user.id}>,
         Bla Bla Bla`)
 
-        const supportRole = ""
+        if (ServerSettings.findOne({guildId: guild.id}).supportId != null) 
+            {const supportRole = `<@${ServerSettings.findOne()}`}
+        else {
+            const supportRole = ""
+        }
+        
 
         liveChannel.threads.create({
             name: `misc-${interaction.user.username}`,
@@ -30,7 +35,7 @@ module.exports = async (client, interaction) => {
             threadChannel
             threadChannel.send({
                 embeds: [embed],
-                content: `<@${supportRole}><@${interaction.user.id}>`
+                content: `${supportRole}<@${interaction.user.id}>`
             })
         })
 

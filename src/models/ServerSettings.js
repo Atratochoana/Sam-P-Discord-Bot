@@ -1,4 +1,4 @@
-const { Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const settingsSchema = new Schema({
     guildId: {
@@ -9,6 +9,9 @@ const settingsSchema = new Schema({
         type: String,
     },
     logChannel: {
+        type: String,
+    },
+    supportId: {
         type: String,
     }
 })
